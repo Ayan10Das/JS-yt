@@ -1,3 +1,15 @@
+// ******Hositing******//
+// In JavaScript variables and functions declarations moved to the top of their scope before their execution.
+
+// var a;-->Internally
+console.log(a);// Gives 'undefined' not error!
+var a=10// a=10-->Internally
+
+// ****Important*****//
+/*
+'Let' and 'Const' are also hoisted but they can't be used before their declaration line ,
+they remain in te Temporal Dead Zone(TDZ)
+*/
 
 // Function declared like this can be CALLED BEFORE Initilization
 console.log(addOne(2))
@@ -17,7 +29,7 @@ const addTwo=function(num){
 function wholeName(){
     const name="Ayan"
     function surName() {
-        console.log(name);// No ERROR , Inner function can access outer function variables as Outer function is keep executing.
+        console.log(name);// No ERROR , Inner function can access outer function variables as Outer function is keep executing or already executed.
         const lastName="das"
     }
     surName();// Prints "Ayan"
