@@ -4,7 +4,7 @@
 // console.log("1"+1+2)
 // If String encounters then it converts it to string
 console.log('2'-'2');
-console.log(2+'1'-2);// -,*,/ converts the number into a string
+console.log(2+'1'-2);// -,*,/ converts the string into a number
 
 /*
 console.log(+"")// Gives 0 as o/p empty string converts to 0
