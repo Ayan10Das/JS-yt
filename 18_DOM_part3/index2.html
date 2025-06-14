@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML element creation using Script</title>
+    <style>
+    body {
+        background-color: black;
+        color: white;
+    }
+    </style>
+</head>
+<body>
+        <script>
+        let div=document.createElement('div');
+        console.log(div); //Prints The created <div></div>
+        // div.id='first-div'; --> ID's can be set like this ,
+        // div.className='div-element';--> Class's can be set.
+        // ***** Better Approach *******//
+        div.setAttribute('id','first-div');
+        div.setAttribute('class','first-element');
+        
+        div.textContent='Hi i am First Created element DIV';
+        console.log(div)// innerText is set using textContent.
+
+        let textNode=document.createTextNode("Hey I am changed a bit!");
+        div.appendChild(textNode)// Doesn't overWrite the previous textContent.
+
+        document.body.appendChild(div);// appended to the web page body and visible to website.
+        //  .append()--> will append to the last of that element.
+        //  .classList --> Shows all the classes it has
+        // .toggle("className")--> toggle the class 
+
+        </script>
+</body>
+</html>

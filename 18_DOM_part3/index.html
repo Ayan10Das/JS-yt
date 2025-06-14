@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+    <style>
+    body {
+        background-color: black;
+        color: white;
+    }
+    </style>
+</head>
+<body>
+    <div class="parent">
+
+
+    <span>Monday</span>
+    <span>Tuesday</span>
+    <span>Wednesday</span>
+</div>
+    <script>
+        let parent=document.querySelector('.parent');
+        // console.log(parent)
+        let childs=parent.children;// Only takes HTML elements as CHILD
+        // console.log(childs);
+
+        // console.log(childs[2].innerText)-->Shows 2nd span INNER_TEXT
+
+        let allChild=parent.childNodes;
+        console.log(allChild);
+
+        // console.log(parent.firstElementChild);
+        // console.log(parent.lastElementChild);
+
+        let firstChild1=parent.firstElementChild;
+        console.log(firstChild1.nextElementSibling.innerHTML)// Prints tuesday
+
+        let firstChild2=document.querySelector('div span');
+        console.log(firstChild2)// span has Multiple properties, in fact every node has multiple properties.
+    </script>
+</body>
+</html>
