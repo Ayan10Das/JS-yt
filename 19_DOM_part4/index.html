@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul class="lang-list">
+        <li> Java Script</li>
+    </ul>
+    <script>
+        // Even if lang is plain text like "java", the browser doesn't know that — it still parses it as HTML because innerHTML always expects an HTML string.
+
+        function addLanguage(lang){
+            let li= document.createElement('li');
+            li.innerHTML=`${lang}`;
+            document.querySelector('.lang-list').appendChild(li);
+        }
+        addLanguage('java');
+        /*
+        ⚙️ So What Does "Parsing HTML" Mean?
+
+            Read the string ("${langName}").
+
+            Parse it like a mini HTML document fragment.
+
+            Build a DOM tree from it.
+
+            Replace the existing content of the element with that new tree.
+
+            This adds extra overhead — especially if you’re just inserting plain text.
+        */
+
+        // ✅ Use textContent or innerText for optimized, safe text insertion — just remember: both overwrite existing content.
+
+        // Layout calculation means the browser figuring out "Where does this element go? What size is it? Is it visible?" — and innerText needs to check that, but textContent doesn’t.
+
+        function addLanguageOptimized(lang){
+        let li= document.createElement('li');
+        li.append(document.createTextNode(lang));
+        document.querySelector('.lang-list').appendChild(li);
+        }
+        addLanguageOptimized("python");
+        /*
+        Directly adds text, not HTML
+
+        No parsing, no risk
+
+        Faster, cleaner, and secure
+        */
+
+        //  Rplace or Edit the Element
+    //  ***** Important *****
+        //  EDIT
+        // Option 1
+        let replaceList=document.querySelector('li:nth-child(2)');
+        // console.log(replaceList)// Total Element: <li>java</li> 
+        let li= document.createElement('li')
+        li.append(document.createTextNode("C++"));
+        replaceList.replaceWith(li)// replaceNode.replaceWith(newNode).
+        
+        // <!-- Option 2 -->
+
+        let thirdChild=document.querySelector('li:nth-child(3)');
+        console.log(thirdChild)// <li>python</li>
+        thirdChild.outerHTML= '<li>node.js</li>'// Have to provide all the HTML.
+
+        //  *****  REMOVE  *****
+        
+        let removeChild1=document.querySelector('li:nth-child(1)');
+        removeChild1.remove();// Remove is a METHOD--> To remove any node.
+
+
+        </script>
+
+</body>
+
+</html>
