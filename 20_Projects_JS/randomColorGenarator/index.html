@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random colour Genarator</title>
+    <style>
+        #yes{
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgb(255, 234, 64);
+        }
+        #no{
+
+            padding: 10px;
+            border-radius: 10px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wanna change the background-color?</h1>    
+    <button id="yes">YES,change it</button>
+    <button id="no">NO,keep it</button>
+    <script>
+        let interval;
+        function randomColour(){
+            let randomValue=Math.round(Math.random()*255+1);
+            console.log(randomValue)
+            return randomValue;
+        }
+    document.querySelector('#yes').addEventListener('click',(e)=>{
+        interval=setInterval(()=>{
+            document.body.style.backgroundColor=`rgb(${randomColour()},${randomColour()},${randomColour()})`
+        },2000);
+    },false);
+
+    document.querySelector('#no').addEventListener('click',(e)=>{
+        clearInterval(interval)
+    });
+    </script>
+</body>
+</html>
