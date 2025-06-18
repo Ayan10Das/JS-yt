@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async nature of JS</title>
+</head>
+<body>
+        <h1 id="name">Hi my name is Ayan Das</h1>
+        <button id="btn" style="background-color: yellow;border-radius: 5px;padding: 5px;">Button</button>
+        <script>
+
+            // Change the <h1> content after 2 secs.
+           let greet=document.querySelector('#name');
+           function changeGreet(){
+            greet.innerHTML=`Good Evening Ayan!`
+           }
+
+           // Takes A handler and a Time in milisec as input.
+           let stopTimeOut=setTimeout(changeGreet,5000);// <h1> content is changed after 2 secs.
+
+            // clearTimeout()-->Used to stop the setTimeOut() function but it takes particular reference of that timeOut which will be stopped. 
+
+            // Stops the setTimeOut() function when the button is clicked.
+            document.querySelector('#btn').addEventListener('click',(e)=>{
+                clearTimeout(stopTimeOut);
+                console.log("Stopped")
+            },false);
+        </script>
+</body>
+</html>
