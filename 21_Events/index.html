@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop"
+                    src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="photoshop"></li>
+            <li><img width="200px" id="japan"
+                    src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="river"
+                    src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="owl"
+                    src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+
+            <!-- onclick="alert('owl is clicked')", can be added inside the html element -->
+
+            <li><img width="200px" id="prayer"
+                    src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+        <div>
+            <ul class="bubbling">
+                <li class="list">hi i am li1</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // ******Event Bubbling******
+        document.querySelector('.bubbling').addEventListener('click', (e) => {
+            console.log("UL is Clicked!")
+        }, false);
+
+        document.querySelector('.bubbling .list').addEventListener('click', (e) => {
+            e.stopPropagation();// Used to stop propagation to parent listener.
+            console.log("List is clicked");
+        }, false);
+        // Alrternate Way to check if the list class event is triggered or not.
+        document.querySelector('.bubbling').addEventListener('click', (e) => {
+            if (e.target.classList.contains('list')) {
+                console.log("LI is Clicked!");
+            }
+        });
+        //****************
+
+        // An event listener is a function that waits for a specific event to happen on a DOM element (like click, input, keydown, etc.).
+
+        //     **Second Approach**
+        //  document.getElementById('owl').onclick=function(){
+        // alert("owl is clicked again");
+        // }
+
+        //  Use 'eventListeners' casue it adds extra functionality.
+        document.querySelector('#owl').addEventListener('click', (event) => {
+            alert('Owl is clicked from Eventlistener');// ** BEST way**
+            console.log(event)// We got a 'EVENT OBJECT'
+        }, false);
+
+        //  **** IMPORTANT **** //
+        // Bubbling is about the event itself, not the presence of an event listener on the child.That's why when a eventListener is in parent node ,and any child node is clicked then it will bubble up to parent and trigger teh eventListener.
+
+        document.querySelector('#google').addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default behavior (like form submission),link open etc. 
+            console.log(e.target);
+            console.log('Google is clicked');
+        });
+
+
+
+        document.querySelector('#images').addEventListener('click', function (e) {
+            // console.log(e.target);   // shoes the event target ,which element is clicked.
+            // console.log(e.target.parentNode)// Shows the parent of target element.
+
+            /*
+            let removeIt=e.target.parentNode;
+            // If clicked on <li> then it will trigger the parent node <ul> nad whole ul will be removed.
+            removeIt.remove();
+            */
+
+            //  Solution for this by providing which targeted event to delete or which to not.
+
+            console.log(e.target.tagName)
+            if (e.target.tagName === 'IMG') {
+                let removeIt = e.target.parentNode;// To select the <li> which contains the image.
+                removeIt.remove();
+            }
+        });
+    </script>
+</body>
+
+</html>
