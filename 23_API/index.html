@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 95vh;
+            width: 95vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            padding: 20px;
+            height: 50vh;
+            width: 60vh;
+            /* border: 2px solid black; */
+        }
+
+        .card {
+            background-color: rgb(227, 232, 232);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            height: 90%;
+            width: 95%;
+            border: 2px solid black;
+        }
+
+        .bioP {
+            font-size: 20px;
+            color: brown;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <img src="" alt="img" width="300px">
+        </div>
+    </div>
+    <script>
+    let card = document.querySelector('.card')
+    let image = document.querySelector('img');
+    let imgUrl;
+    let githubName;
+    let bio;
+    /*
+    Value	State	Description
+0	    UNSENT	Client has been created. open() not called yet.
+1	    OPENED	open() has been called.
+2	    HEADERS_RECEIVED	send() has been called, and headers and status are available.
+3	    LOADING	Downloading; responseText holds partial data.
+4	    DONE	The operation is complete.
+    */
+    let apiUrl = 'https://api.github.com/users/Ayan10Das';
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', apiUrl);
+
+    xhr.onreadystatechange = function () {
+        // console.log(xhr.readyState)
+        // console.log(xhr.status)
+        // console.log(this.responseText);
+        if (xhr.readyState === 4 && xhr.status === 200) { //status check
+            let data = JSON.parse(this.responseText);
+            // console.log(typeof data)
+            githubName = data.name;
+            bio = data.bio;
+            imgUrl = data.avatar_url;
+
+            // let textNode = document.createTextNode(githubName)
+            // nameH.append(textNode)// Already text added here
+            nameH.innerText = githubName; //cleaner and avoids [object Text]
+            card.appendChild(nameH)
+
+            /*
+            nameH.innerText+=textNode;
+            textNode is a Text Node object. When you do nameH.innerText += textNode, 
+            JavaScript implicitly converts the textNode object to a string.
+            */
+
+            image.setAttribute('src', `${imgUrl}`);
+            bioP.innerHTML = `<h3>BIO: ${bio}</h3>`;
+            card.appendChild(bioP);
+        }
+    }
+    xhr.send();
+
+    let bioP = document.createElement('p');
+    bioP.classList.add('bioP');
+
+    let nameH = document.createElement('h2');
+    nameH.classList.add('name');
+    // console.log(bioP.classList)
+    // console.log(bioP.hasAttribute(bioP));
+
+
+    </script>
+</body>
+</html>
